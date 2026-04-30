@@ -6,7 +6,7 @@ function getComputerChoice() {
     } else if (choice == 2) {
         return 'paper'
     } else {
-        return 'siccsor'
+        return 'scissors'
     }
     
 }
@@ -47,11 +47,36 @@ const scissors = document.createElement('button')
 scissors.textContent = "scissors"
 body.append(scissors)
 
+const div = document.createElement('div')
+div.textContent = `human Score: ${humanScore} computerScore:${computerScore}`
+body.append(div)
+
+const winer = document.createElement('div')
+body.append(winer)
+
+
 const btns = document.querySelectorAll('button')
 btns.forEach((button) => {
     button.addEventListener('click', () => {
         const humanChoice = button.textContent;
         const computerChoice = getComputerChoice();
-        console.log(playRound(humanChoice, computerChoice))
-    })
-})
+        const result = playRound(humanChoice, computerChoice)
+        div.textContent = `human Score: ${humanScore} computerScore:${computerScore}`
+        console.log(result)
+        
+        if (humanScore === 5) {
+            winer.textContent = "🏆 Human wins the game! Refresh to play again.";
+            disableButtons();
+        }else if (computerScore === 5) {
+            winer.textContent = "💻 Computer wins the game! Refresh to play again.";
+            disableButtons();
+        }
+        
+})})
+// create div
+
+function disableButtons() {
+    btns.forEach(btn => {
+        btn.disabled = true; 
+    });
+}
