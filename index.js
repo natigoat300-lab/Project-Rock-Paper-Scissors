@@ -11,9 +11,6 @@ function getComputerChoice() {
     
 }
 
-function getHumanChoice() {
-    return prompt("Choice: rock, paper, or scissors").toLowerCase();
-}
 let humanScore = 0;
 let computerScore = 0;
 
@@ -32,30 +29,29 @@ function playRound(humanChoice, computerChoice) {
 }
     
 }
-const humanSelection = getHumanChoice();
+
 const computerSelection = getComputerChoice();
 
 
-// create a play game function
-function playGame() {
+// create buttons
+const body = document.querySelector('body')
+const rock = document.createElement('button')
+rock.textContent = "rock"
+body.append(rock)
+//paper
+const paper = document.createElement('button')
+paper.textContent = "paper"
+body.append(paper)
+//scissors
+const scissors = document.createElement('button')
+scissors.textContent = "scissors"
+body.append(scissors)
 
-    for (let i = 0; i < 5; i++ ) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        const result = playRound(humanSelection, computerSelection)
-        console.log(result)
-        console.log(`CURRENT SCORE -> Human: ${humanScore} | Computer: ${computerScore}`)
-    }
-    if (humanScore > computerScore) {
-        console.log("You win! Human beats computer");
-
-    }else if (humanScore < computerScore) {
-        console.log("You lost! Computer beats Human")
-
-    }else {
-        console.log("It's draw! Human 🤝 Computer ")
-    }
-    console.log(`FINAL SCORE -> Human: ${humanScore} | Computer: ${computerScore}`)
-}
-playGame();
-
+const btns = document.querySelectorAll('button')
+btns.forEach((button) => {
+    button.addEventListener('click', () => {
+        const humanChoice = button.textContent;
+        const computerChoice = getComputerChoice();
+        console.log(playRound(humanChoice, computerChoice))
+    })
+})
