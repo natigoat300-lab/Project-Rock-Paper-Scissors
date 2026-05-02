@@ -46,12 +46,15 @@ body.append(paper)
 const scissors = document.createElement('button')
 scissors.textContent = "scissors"
 body.append(scissors)
-
+// display each round winner
+const displayEachRound = document.createElement('p')
+displayEachRound.textContent = `Each round result: `
+body.append(displayEachRound)
 const div = document.createElement('div')
 div.textContent = `human Score: ${humanScore} computerScore:${computerScore}`
 body.append(div)
 
-const winer = document.createElement('div')
+const winer = document.createElement('h1')
 body.append(winer)
 
 
@@ -61,8 +64,9 @@ btns.forEach((button) => {
         const humanChoice = button.textContent;
         const computerChoice = getComputerChoice();
         const result = playRound(humanChoice, computerChoice)
+        displayEachRound.textContent = `Each round result: ${result}`
         div.textContent = `human Score: ${humanScore} computerScore:${computerScore}`
-        console.log(result)
+        
         
         if (humanScore === 5) {
             winer.textContent = "🏆 Human wins the game! Refresh to play again.";
